@@ -31,5 +31,8 @@ export default {
   modules: [],
 
   // Build Configuration (https://go.nuxtjs.dev/config-build)
-  build: {},
+  // Checkout articles: (https://official-osorina.medium.com/building-a-3d-product-configurator-using-nuxt-and-three-js-part-2-fc960e19aa18)
+  build: {
+    transpile: ['three'],
+  },
 }
