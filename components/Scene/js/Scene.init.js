@@ -8,7 +8,7 @@ class SceneInit {
     this.width = rootEl.clientWidth
     this.height = rootEl.clientHeight
 
-    this.background = 0xab34cd
+    this.background = 0x000000
 
     this.canvas = document.createElement('canvas')
 
@@ -44,20 +44,26 @@ class SceneInit {
   initCamera() {
     const aspect = this.width / this.height
     this.camera = new THREE.PerspectiveCamera(75, aspect, 1, 1000)
+    this.camera.position.z = 20
+
     // Next line originates from example
     // this.camera = new THREE.PerspectiveCamera(45, aspect, 1, 1000)
 
-    this.camera.position.x = 2
-    this.camera.position.y = 2
+    // this.camera.position.x = 2
+    // this.camera.position.y = 2
     // this.camera.aspect = aspect
     // this.camera.updateProjectionMatrix()
   }
 
   initGeometry() {
-    this.geometry = new THREE.BoxGeometry(1, 1, 1)
-    this.material = new THREE.MeshBasicMaterial({ color: 0x00a1cb })
-    this.cube = new THREE.Mesh(this.geometry, this.material)
-    this.scene.add(this.cube)
+    // 2nd and 3rd arguments are heightSegments and widthSegments
+    this.geometry = new THREE.SphereGeometry(5, 30, 30)
+    this.material = new THREE.MeshBasicMaterial({
+      color: 0xffffff,
+      wireframe: true,
+    })
+    this.sphere = new THREE.Mesh(this.geometry, this.material)
+    this.scene.add(this.sphere)
     this.add = 0
   }
 
@@ -70,8 +76,8 @@ class SceneInit {
   }
 
   render() {
-    this.cube.rotation.y = this.add
-    this.add += 0.01
+    this.sphere.rotation.y = this.add
+    this.add += 0.02
 
     this.camera.lookAt(this.scene.position)
     this.renderer.render(this.scene, this.camera)
