@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import SceneInit from './js/Scene.init'
+import SceneInit from './js/GlobeScene.init'
 
 export default {
   mounted() {

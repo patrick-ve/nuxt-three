@@ -56,14 +56,26 @@ class SceneInit {
   }
 
   initGeometry() {
-    // 2nd and 3rd arguments are heightSegments and widthSegments
-    this.geometry = new THREE.SphereGeometry(5, 30, 30)
-    this.material = new THREE.MeshBasicMaterial({
-      color: 0xffffff,
-      wireframe: true,
+    const globeTextureURI =
+      'https://2.bp.blogspot.com/-Jfw4jY6vBWM/UkbwZhdKxuI/AAAAAAAAK94/QTmtnuDFlC8/s1600/2_no_clouds_4k.jpg'
+    this.loader = new THREE.TextureLoader()
+    this.loader.load(globeTextureURI, function (texture) {
+      const geometry = new THREE.SphereGeometry(5, 30, 30)
+      const material = new THREE.MeshBasicMaterial({
+        map: texture,
+        overdraw: 0.5,
+      })
+      const mesh = new THREE.Mesh(geometry, material)
+      const group = new THREE.Group()
+      group.add(mesh)
     })
-    this.sphere = new THREE.Mesh(this.geometry, this.material)
-    this.scene.add(this.sphere)
+
+    // this.material = new THREE.MeshBasicMaterial({
+    //   color: 0xffffff,
+    //   wireframe: true,
+    // })
+    // this.sphere = new THREE.Mesh(this.geometry, this.material)
+    // this.scene.add(this.sphere)
     this.add = 0
   }
 
@@ -76,8 +88,8 @@ class SceneInit {
   }
 
   render() {
-    this.sphere.rotation.y = this.add
-    this.add += 0.02
+    // this.sphere.rotation.y = this.add
+    // this.add += 0.02
 
     this.camera.lookAt(this.scene.position)
     this.renderer.render(this.scene, this.camera)
